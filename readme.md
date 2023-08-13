@@ -31,7 +31,7 @@ The dataset includes both ground truth from motion capture systems and synchroni
 
 ## Implement 
 
-please download the data [here]() and unzip it to folder ./dataset before runing the scripts. 
+please download the data [here](https://feel.ece.ubc.ca/smartkneesleeve/) and unzip it to folder ./dataset before runing the scripts. 
 
 Implement the project by running:
 
