@@ -21,12 +21,12 @@ We provide a baseline for lower body pose estimation for wearable sensors: Smart
 The dataset includes both ground truth from motion capture systems and synchronized data from wearable sensors. We have 14 channels of pressure sensor data and 9 channels of IMU data for each leg. Below is a simple demo for pose estimation results with 3 poses: Squatting, Hamstring curl, and Leg Raise. In the first gif, the figure from left to right is motion capture results, predictions, and app GUI separately. The pink dummy in the remaining figures is ground truth data restored directly from motion capture data while the blue dummy is visualized from the smart knee sleeve sensor values. 
 
 <!-- ![Alt Text](figure/squat_demo.gif){:width="60%"} -->
-<!-- <img src="figure/squat.gif" alt="Alt Text" width="500"> -->
+<img src="figure/squat.gif" alt="Alt Text" width="500">
 
-<!-- <img src="figure/hamstring.gif" alt="Alt Text" width="500"> -->
+<img src="figure/hamstring.gif" alt="Alt Text" width="500">
 <!-- ![Alt Text](figure/hamstring.gif){:width="60%"} -->
 
-<!-- <img src="figure/Legraise.gif" alt="Alt Text" width="500"> -->
+<img src="figure/Legraise.gif" alt="Alt Text" width="500">
 <!-- ![Alt Text](figure/Legraise.gif){:width="60%"} -->
 
 ## Implement 
