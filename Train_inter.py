@@ -29,7 +29,7 @@ if __name__ == '__main__':
     parser.add_argument('--unseen_type', type=str, default='bendsquat', choices=['bendsquat', 'hamstring','legraise','legraise_90'])
     parser.add_argument('--Test_day', type=int, default=7)
     parser.add_argument('--Test_pid', type=int, default=1)
-
+    parser.add_argument('--num_epochs', type=int, default=2000)
     args = parser.parse_args()
 
     SEED = args.seed

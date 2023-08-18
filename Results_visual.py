@@ -112,6 +112,8 @@ def Unseen_tasks(folder,colors):
     folder = folder+"/UnseenTasks/"
     rmse = np.zeros((8,len(unseen_tasks)))
     rmse_xyz = np.zeros((len(unseen_tasks)*3,8))
+    pred_dgre_avg = []
+    grd_dgre_avg = []
     for index, unseen_task in enumerate(unseen_tasks):
         prediction = pd.read_csv(folder+unseen_task+'_prediction.csv',header=None).values
         grd = pd.read_csv(folder+unseen_task+'_ground_.csv',header=None).values
@@ -120,7 +122,9 @@ def Unseen_tasks(folder,colors):
         pred_dgree=quat2euler(prediction)
         grd_dgree=quat2euler(grd)
         rmse[:,index], rmse_xyz[index*3:index*3+3,:] = cal_RMSE(pred_dgree,grd_dgree)
-
+        pred_dgre_avg.extend(pred_dgree)
+        grd_dgre_avg.extend(grd_dgree)
+    rmse_avg,rmse_xyz_all = cal_RMSE(np.array(pred_dgre_avg),np.array(grd_dgre_avg))
     print("finish")
 
 def all_seen(folder,colors_3):
@@ -128,9 +132,18 @@ def all_seen(folder,colors_3):
     pred = pd.read_csv(folder+"/UnseenTasks/"+file+"_prediction.csv",header=None).values
     grd = pd.read_csv(folder+"/UnseenTasks/"+file+"_ground_.csv",header=None).values
     sub_info=pd.read_csv(folder+"/UnseenTasks/"+file+"_sub_info.csv", index_col=0)
+    pred_dgree=quat2euler(pred)
+    grd_dgree=quat2euler(grd)
     quat_distances_suqat =[]
     quat_distances_hamstring = []
     quat_distances_legraise = []
+    dgr_squat_pred=[]
+    dgr_squat_grd = []
+    dgr_hamstring_pred=[]
+    dgr_hamstring_grd=[]
+    dgr_legraise_pred=[]
+    dgr_legraise_grd = []
+    rmse_per,rmse_xyz = cal_RMSE(pred_dgree,grd_dgree)
     for index in sub_info.index:
         start_step = sub_info['start_steps'][index]
         end_step = sub_info['end_steps'][index]
@@ -138,11 +151,17 @@ def all_seen(folder,colors_3):
         time_stamp = np.linspace(0,(end_step-start_step)/f,end_step-start_step)
         if 'Squat' in sub_info['filename'][index]:
             quat_distances_suqat.extend(quat_error_per)
+            dgr_squat_pred.extend(pred_dgree[start_step:end_step,:])
+            dgr_squat_grd.extend(grd_dgree[start_step:end_step,:])
             # plot_compare(time_stamp, pred[start_step:end_step,:],grd[start_step:end_step,:])
         elif 'Hamstring' in sub_info['filename'][index]:
             quat_distances_hamstring.extend(quat_error_per)
+            dgr_hamstring_pred.extend(pred_dgree[start_step:end_step,:])
+            dgr_hamstring_grd.extend(grd_dgree[start_step:end_step,:])
         elif 'LegRaise' in sub_info['filename'][index]:
             quat_distances_legraise.extend(quat_error_per)
+            dgr_legraise_pred.extend(pred_dgree[start_step:end_step,:])
+            dgr_legraise_grd.extend(grd_dgree[start_step:end_step,:])
             # plot_compare(time_stamp, pred[start_step:end_step,:],grd[start_step:end_step,:])
         else:
             print(sub_info['filename'][index] + " unrecognized")      
@@ -150,6 +169,9 @@ def all_seen(folder,colors_3):
     quat_boxplot_seperate(quat_distances_suqat,"Squat",colors_3[0])  
     quat_boxplot_seperate(quat_distances_hamstring,"Hamstring",colors_3[1])
     quat_boxplot_seperate(quat_distances_legraise,"LegRaise",colors_3[2])
+    rmse_per_squat,rmse_xyz_squat = cal_RMSE(np.array(dgr_squat_pred),np.array(dgr_squat_grd))
+    rmse_per_hamstring,rmse_xyz_hamstring = cal_RMSE(np.array(dgr_hamstring_pred),np.array(dgr_hamstring_grd))
+    rmse_per_legraise,rmse_xyz_legraise = cal_RMSE(np.array(dgr_legraise_pred),np.array(dgr_legraise_grd))
 
 if __name__ == '__main__':
     folder = "./Results_visual/"
