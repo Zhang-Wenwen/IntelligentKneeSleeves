@@ -51,7 +51,12 @@ Change parameters according to your requirements.
 
 If you find the dataset or code useful, please cite our papers:
 
-{}
+@article{zhang2023intelligent,
+  title={Intelligent Knee Sleeves: A Real-time Multimodal Dataset for 3D Lower Body Motion Estimation Using Smart Textile},
+  author={Zhang, Wenwen and Tashakori, Arvin and Jiang, Zenan and Servati, Amir and Narayana, Harishkumar and Soltanian, Saeid and Yeap, Rou Yi and Ma, Meng Han and Toy, Lauren and Servati, Peyman},
+  journal={arXiv preprint arXiv:2311.12829},
+  year={2023}
+}
 
 <!-- ## License
 
