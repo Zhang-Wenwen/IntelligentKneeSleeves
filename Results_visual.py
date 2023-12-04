@@ -43,7 +43,7 @@ def plot_compare(time_stamp,pre,grd):
         axs[2,i].set_title('Ankel angle ('+ side + ')')
 
         axs[3,i].plot(time_stamp, pre[:,12+start_column:16+start_column],marker='o',markersize=markersize,markevery=markevery,label=quat_label)
-        axs[3,i].plot(time_stamp,grd[:,8+start_column:12+start_column],marker='x',markersize=markersize,markevery=markevery,label=grd_label),
+        axs[3,i].plot(time_stamp,grd[:,12+start_column:16+start_column],marker='x',markersize=markersize,markevery=markevery,label=grd_label),
         axs[3,i].set_title('Toe angle ('+ side + ')')
     # plt.xlabel('Time (s) \n Compare of ground truth and predictions')
     fig.text(0.5, -0.01, 'Time (s) \n Compare of ground truth and predictions', ha='center')
